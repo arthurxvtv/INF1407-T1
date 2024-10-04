@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Lista de Reviews</h1>
+{% for review in reviews %}
+<div style="display: flex; justify-content: flex-start; align-items:center; gap: 10px;">
+    <h1> {{ review.game_name }}: </h1>
+    <h1 style="margin-left: 25px;"> {{ review.stars }} ★ </h1>
+    <a> editar </a>
+    /
+    <a> deletar </a>
+</div>
+{% endfor %}
+{% endblock %}

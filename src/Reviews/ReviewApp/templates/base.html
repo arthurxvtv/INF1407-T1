@@ -11,7 +11,9 @@
 <body></body>
 <h1>Game Revies</h1>
 <div>
-    <a href="/">Homepage</a>
+    <a href="/review/">Homepage</a>
+    |
+    <a href="/review/cria/">Criar Review</a>
     {% if not user.is_authenticated %}
     | <a href="{% url 'login' %}?next={% url 'home' %}">
         Login
