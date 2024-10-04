@@ -18,16 +18,14 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 from django.urls.base import reverse_lazy
+from django.urls.conf import include
 from ReviewApp.views import home
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     # incluir a seguinte linha
-    path('login/', LoginView.as_view(
-        template_name='registration/login.html',
-    ), name='login'),
+    path("login/", LoginView.as_view(template_name="registration/login.html",), name="login"),
     path("", home, name="home"),
-    path('logout/', LogoutView.as_view(
-        next_page=reverse_lazy('home'),
-    ), name='logout'),
+    path("logout/", LogoutView.as_view(next_page=reverse_lazy("home"),), name="logout"),
+    path("review/", include("ReviewApp.urls")),
 ]
