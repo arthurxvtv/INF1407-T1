@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Atualiza review</h1>
+<form action="" method="POST">
+    <fieldset style="width: max-content;">
+        <legend>Formulário de Atualização</legend>
+        {% csrf_token %}
+        <table class='formulario'>
+            {{ formulario.as_table }}
+        </table>
+        <button type="submit">Atualiza review</button>
+    </fieldset>
+</form>
+{% endblock %}

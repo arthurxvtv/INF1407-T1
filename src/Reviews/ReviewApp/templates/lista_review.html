@@ -5,9 +5,9 @@
 <div style="display: flex; justify-content: flex-start; align-items:center; gap: 10px;">
     <h1> {{ review.game_name }}: </h1>
     <h1 style="margin-left: 25px;"> {{ review.stars }} ★ </h1>
-    <a> editar </a>
+    <a href="{% url 'review:atualiza-review' pk=review.id %}"> editar </a>
     /
-    <a> deletar </a>
+    <a href="{% url 'review:deleta-review' pk=review.id %}"> deletar </a>
 </div>
 {% endfor %}
 {% endblock %}

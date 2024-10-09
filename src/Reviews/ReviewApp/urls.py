@@ -10,5 +10,7 @@ app_name = "review"
 urlpatterns = [
     path("cria/", views.ReviewCreateView.as_view(), name="cria-review"),
     path("", views.lista_review, name="lista-review"),
+    path("atualiza/<int:pk>/", views.ReviewUpdateView.as_view(), name="atualiza-review"),
+    path("deleta/<int:pk>/", views.ReviewDeleteView.as_view(), name="deleta-review"),
     # path("", views.ContatoListView.as_view(), name="home-contatos"),
 ]
