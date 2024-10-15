@@ -9,18 +9,21 @@
 </head>
 
 <body></body>
-<h1>Game Revies</h1>
+<h1>Game Reviews</h1>
 <div>
     <a href="/review/">Homepage</a>
+    {% if user.is_authenticated %}
     |
     <a href="/review/cria/">Criar Review</a>
-    {% if not user.is_authenticated %}
-    | <a href="{% url 'login' %}?next={% url 'home' %}">
-        Login
-    </a>
+    |
+    <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    |
+    <a href="{% url 'login' %}?next={% url 'home' %}">Login</a>
+    |
+    <a href="{% url 'registro' %}?next={% url 'registro' %}">Registro</a>
     {% endif %}
     | Você é {% firstof user.username "visitante" %}
-    | <a href="{% url 'logout' %}">Logout</a>
 </div>
 <hr>
 {% block content %}{% endblock %}

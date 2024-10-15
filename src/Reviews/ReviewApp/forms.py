@@ -1,13 +1,13 @@
-'''
-Created on 8 de out de 2019
-@author: meslin
-'''
+"""
+Created on 15 de out de 2024
+@author: arthurxvtv
+"""
 from django import forms
 from ReviewApp.models import Review
 
 
 class ReviewForm(forms.ModelForm):
-    """cala a boca pylint."""
+    """summary."""
 
     class Meta:
 

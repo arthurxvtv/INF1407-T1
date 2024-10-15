@@ -19,7 +19,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 from django.urls.base import reverse_lazy
 from django.urls.conf import include
-from ReviewApp.views import home
+from ReviewApp.views import home, registro
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -28,4 +28,5 @@ urlpatterns = [
     path("", home, name="home"),
     path("logout/", LogoutView.as_view(next_page=reverse_lazy("home"),), name="logout"),
     path("review/", include("ReviewApp.urls")),
+    path("registro/", registro, name="registro"),
 ]

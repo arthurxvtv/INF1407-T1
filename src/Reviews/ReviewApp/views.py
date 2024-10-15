@@ -5,6 +5,8 @@ from django.urls.base import reverse_lazy
 from ReviewApp.forms import ReviewForm
 from ReviewApp.models import Review
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def home(request):
@@ -36,6 +38,17 @@ def lista_review(request):
         return HttpResponseRedirect(reverse_lazy("login"))
     reviews = Review.objects.filter(user=request.user)
     return render(request, "lista_review.html", {"reviews": reviews})
+
+def registro(request):
+    if request.method == "POST":
+        formulario = UserCreationForm(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect("home")
+    else:
+        formulario = UserCreationForm()
+    context = {"form": formulario, }
+    return render(request, "registration/registro.html", context)
 
 class ReviewUpdateView(View):
     def get(self, request, pk, *args, **kwargs):
