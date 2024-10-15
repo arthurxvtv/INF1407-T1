@@ -17,6 +17,8 @@
     <a href="/review/cria/">Criar Review</a>
     |
     <a href="{% url 'logout' %}">Logout</a>
+    |
+    <a href="{% url 'alterar_senha' %}">Alterar Senha</a>
     {% else %}
     |
     <a href="{% url 'login' %}?next={% url 'home' %}">Login</a>

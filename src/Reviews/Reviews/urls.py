@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.views import PasswordChangeDoneView
 from django.urls import path
 from django.urls.base import reverse_lazy
 from django.urls.conf import include
@@ -29,4 +31,6 @@ urlpatterns = [
     path("logout/", LogoutView.as_view(next_page=reverse_lazy("home"),), name="logout"),
     path("review/", include("ReviewApp.urls")),
     path("registro/", registro, name="registro"),
+    path("alterar-senha/", PasswordChangeView.as_view(template_name="registration/alterar_senha.html", success_url=reverse_lazy("alterar_senha_sucesso")), name="alterar_senha"),
+    path("alterar-senha/done/", PasswordChangeDoneView.as_view(template_name="registration/alterar_senha_sucesso.html",), name="alterar_senha_sucesso"),
 ]
