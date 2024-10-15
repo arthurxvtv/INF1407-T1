@@ -15,13 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.views import PasswordChangeView
-from django.contrib.auth.views import PasswordChangeDoneView
+from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 from django.urls import path
 from django.urls.base import reverse_lazy
 from django.urls.conf import include
-from ReviewApp.views import home, registro
+from ReviewApp.views import MyUpdateView, home, registro
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -33,4 +32,10 @@ urlpatterns = [
     path("registro/", registro, name="registro"),
     path("alterar-senha/", PasswordChangeView.as_view(template_name="registration/alterar_senha.html", success_url=reverse_lazy("alterar_senha_sucesso")), name="alterar_senha"),
     path("alterar-senha/done/", PasswordChangeDoneView.as_view(template_name="registration/alterar_senha_sucesso.html",), name="alterar_senha_sucesso"),
+    path("atualiza-usuario/<int:pk>/", MyUpdateView.as_view(
+        template_name="registration/usuario_form.html",
+        success_url=reverse_lazy("home"),
+        model=User,
+        fields=["username","first_name", "last_name", "email"],
+    ), name="atualiza_usuario"),
 ]

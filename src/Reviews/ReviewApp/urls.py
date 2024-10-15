@@ -1,6 +1,6 @@
 """
 Created on 4 de out de 2024
-@author: tutuzinsheik
+@author: arthurxvtv
 """
 from django.urls.conf import path
 from ReviewApp import views
@@ -12,5 +12,4 @@ urlpatterns = [
     path("", views.lista_review, name="lista-review"),
     path("atualiza/<int:pk>/", views.ReviewUpdateView.as_view(), name="atualiza-review"),
     path("deleta/<int:pk>/", views.ReviewDeleteView.as_view(), name="deleta-review"),
-    # path("", views.ContatoListView.as_view(), name="home-contatos"),
 ]

@@ -18,6 +18,8 @@
     |
     <a href="{% url 'logout' %}">Logout</a>
     |
+    <a href="{% url 'atualiza_usuario' pk=user.id %}">Editar Registro</a>
+    |
     <a href="{% url 'alterar_senha' %}">Alterar Senha</a>
     {% else %}
     |

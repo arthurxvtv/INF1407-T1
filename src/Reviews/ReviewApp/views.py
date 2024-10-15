@@ -7,6 +7,7 @@ from ReviewApp.models import Review
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.edit import UpdateView
 
 # Create your views here.
 def home(request):
@@ -77,3 +78,9 @@ class ReviewDeleteView(View):
         review = Review.objects.get(pk=pk)
         review.delete()
         return HttpResponseRedirect(reverse_lazy("review:lista-review"))
+
+class MyUpdateView(UpdateView):
+    def get(self, request, pk, *args, **kwargs):
+        if request.user.id == pk:
+            return super().get(request, pk, args, kwargs)
+        return redirect("home")
