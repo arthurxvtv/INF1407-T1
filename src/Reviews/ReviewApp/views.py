@@ -23,16 +23,18 @@ def home(request):
 
 class ReviewCreateView(View):
     def get(self, request, *args, **kwargs):
-        contexto = { 'formulario': ReviewForm, }
+        contexto = {'formulario': ReviewForm(user=request.user)}
         return render(request, "cria_review.html", contexto)
 
     def post(self, request, *args, **kwargs):
-        formulario = ReviewForm(request.POST)
+        formulario = ReviewForm(request.POST, user=request.user)
         if formulario.is_valid():
-            contato = formulario.save()
-            contato.save()
+            review = formulario.save(commit=False)
+            review.usuario = request.user
+            review.save()
             return HttpResponseRedirect(reverse_lazy("review:lista-review"))
-        return None
+        contexto = {'formulario': formulario}
+        return render(request, "cria_review.html", contexto)
 
 def lista_review(request):
     if request.user.is_anonymous:
@@ -54,18 +56,19 @@ def registro(request):
 class ReviewUpdateView(View):
     def get(self, request, pk, *args, **kwargs):
         review = Review.objects.get(pk=pk)
-        formulario = ReviewForm(instance=review)
-        context = {"formulario": formulario, }
+        formulario = ReviewForm(instance=review, user=request.user)
+        context = {"formulario": formulario}
         return render(request, "atualiza_review.html", context)
 
     def post(self, request, pk, *args, **kwargs):
-        review: Review = get_object_or_404(Review, pk=pk)
-        formulario = ReviewForm(request.POST, instance=review)
+        review = get_object_or_404(Review, pk=pk)
+        formulario = ReviewForm(request.POST, instance=review, user=request.user)
         if formulario.is_valid():
-            review = formulario.save()  # cria uma review com os dados do formulário
-            review.save()  # salva uma review no banco de dados
+            review = formulario.save(commit=False)
+            review.usuario = request.user
+            review.save()
             return HttpResponseRedirect(reverse_lazy("review:lista-review"))
-        contexto = {"formulario": formulario, }
+        contexto = {"formulario": formulario}
         return render(request, "atualiza_review.html", contexto)
 
 class ReviewDeleteView(View):
